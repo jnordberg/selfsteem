@@ -1,0 +1,38 @@
+{
+  "locals": {
+    "title": "My SelfSteem Blog",
+    "author": "Santa Claus",
+    "username": "donkeypong",
+    "copyright": "© 2017",
+    "locale": "en",
+    "release": "1"
+  },
+  "i18n": {
+    "defaultLocale": "en",
+    "locales": ["en", "ja"]
+  },
+  "static": [
+    "styles/loading.styl",
+    "scripts/**/*"
+  ],
+  "ignore": [".DS_Store"],
+  "browserify": {
+    "debug": true,
+    "watchify": false,
+    "extensions": [".ts"],
+    "plugins": ["tsify"],
+    "staticLibs": ["steem", "moment"],
+    "staticLibsBundle": true
+  },
+  "stylus": {
+    "dependencies": ["nib"]
+  },
+  "plugins": [
+    "wintersmith-browserify",
+    "wintersmith-i18n",
+    "wintersmith-livereload",
+    "wintersmith-nunjucks",
+    "wintersmith-stylus",
+    "wintersmith-static"
+  ]
+}

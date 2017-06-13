@@ -1,0 +1,70 @@
+
+// Loading animation based on Devilish Alchemist's "Preloader animation"
+// https://codepen.io/devilishalchemist/pen/emOVYQ
+
+size = 3.6em
+speed = 1.7s
+expand = 2.2
+color1 = #fff
+color2 = lighten(accent-color, 20%)
+
+@keyframes loader
+  0%, 10%, 100%
+    width: size
+    height: size
+  25%
+    width: size * expand
+    height: size * expand
+
+@keyframes loaderBlock
+  0%, 30%
+    transform: rotate(0)
+  55%
+    background-color: color2
+    border-radius: 10%
+  100%
+    transform: rotate(90deg)
+
+@keyframes loaderBlockInverse
+  0%, 20%
+    transform: rotate(0)
+  55%
+    background-color: color2
+    border-radius: 10%
+  100%
+    transform: rotate(-90deg)
+
+div
+  position: absolute
+  top: 50%
+  left: 50%
+  width: size
+  height: size
+  transform: translate(-50%, -50%) rotate(45deg) translate3d(0,0,0)
+  animation: loader speed infinite ease-in-out
+
+  span
+    position: absolute
+    display: block
+    width: size * 0.5
+    height: size * 0.5
+    background-color: color1
+    animation: loaderBlock speed infinite ease-in-out both
+
+    &:nth-child(1)
+      top: 0
+      left: 0
+
+    &:nth-child(2)
+      top: 0
+      right: 0
+      animation: loaderBlockInverse speed infinite ease-in-out both
+
+    &:nth-child(3)
+      bottom: 0
+      left: 0
+      animation: loaderBlockInverse speed infinite ease-in-out both
+
+    &:nth-child(4)
+      bottom: 0
+      right: 0

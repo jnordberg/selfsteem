@@ -1,0 +1,140 @@
+
+@import 'nib'
+
+@import url('https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css')
+normalize-html5()
+
+accent-color = #00a7c2
+background-color = #fdfdfd
+text-color = #191919
+text-color-active = accent-color
+
+small-width = 1000px
+mobile-width = 800px
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+  list-style: none
+
+@import './typography.styl'
+
+html
+  height: 100%
+  @media (max-width: small-width)
+    font-size: 15px
+  @media (max-width: mobile-width)
+    font-size: 14px
+
+body
+  min-height: 100%
+  color: text-color
+  background: background-color
+  width: 50em
+  margin: 0 auto
+  position: relative
+  @media (max-width: mobile-width)
+    width: auto
+    margin: 0 2em
+
+
+a
+  text-decoration: none
+  &, &:visited
+    color: accent-color
+  &:hover
+    text-decoration: underline
+
+#no-js
+  display: none
+  .no-js &
+    display: block
+
+#templates
+  display: none
+
+body > header
+  margin-top: 10em
+  margin-bottom: 4em
+  border-bottom: 0.1em solid #f2f2f2
+  @media (max-width: mobile-width)
+    margin-top: 2em
+    margin: 0 2em
+
+  h1
+    text-align: center
+    margin: 0.68em
+
+.post
+  header h1 a
+    color: inherit
+    &:hover
+      text-decoration: inherit
+      color: accent-color
+  margin-bottom: 4em
+  img
+    max-width: 100%
+  &.full header h1
+    margin-bottom: 1em
+
+#posts
+  min-height: 100vh
+
+#posts-nav
+  text-align: center
+  margin-bottom: 4em
+  a
+    @extends .h3
+    margin: 0 1em
+    display: none
+    .has-older &.older
+      display: inline
+    .in-history &.home, .on-post &.home
+      display: inline
+
+#posts .loading
+  @import './loading.styl'
+  size = 6em
+  position: absolute
+  margin-top: 4em
+  width: size
+  height: size
+  background: accent-color
+  border-radius: 50%
+  left: 50%
+  margin-left: -(size * 0.5)
+  transition: 300ms ease-in-out all
+  p
+    position: absolute
+    width: 100%
+    text-align: center
+    bottom: 0
+    margin-bottom: -2.5em
+    text-shadow: 0 0 3px white
+    white-space: nowrap
+    width: 200%
+    left: -50%
+  .loaded &
+    opacity: 0
+    visibility: hidden
+
+footer
+  h2
+    margin-bottom: 0.3em
+  .about
+    column-count: 2
+    column-gap: 2em
+    margin-bottom: 2em
+    @media (max-width: mobile-width)
+      column-count: 1
+  .footnote
+    text-align: center
+    font-size: 80%
+    margin: 6em 0 3em
+    a, &
+      color: lighten(text-color, 30%)
+      font-weight: 300
+      font-style: italic
+
+

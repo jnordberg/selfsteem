@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% macro link(href, text) -%}
+  <a href="{{ href }}" target="_blank">{{ text }}</a>
+{%- endmacro %}
+
+{% set lang = setLocale(locale) %}
+
+{% block body %}
+  <div id="no-js">
+    <p>
+      {{ __('This blog is powered by the %s and requires JavaScript to run.',
+            link('https://steem.io', __('Steem blockchain'))) }}
+    </p>
+  </div>
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+  <section id="posts">
+    <div class="loading">
+      <p>{{ __('Loading...') }}</p>
+      <div><span></span><span></span><span></span><span></span></div>
+    </div>
+  </section>
+  <section id="posts-nav">
+    <a class="older" href="#">{{ __('Older posts') }}</a>
+    <a class="home" href="#">{{ __('Home') }}</a>
+  </section>
+  <footer>
+    <h2>{{ __('About') }}</h2>
+    <section class="about">
+      {{ contents['about.md'].html }}
+    </section>
+    <section class="footnote">
+      <p>{{ copyright }} {{ author }} &mdash;
+      {# Please leave this, if you must remove it donate a couple of
+       steem to @almost-digital and I'll let you do it guilt-free ;) -#}
+      {{ __('powered by') }} {{ link('https://github.com/jnordberg/selfsteem', 'SelfSteem') }}
+    </section>
+  </footer>
+  <div id="templates">
+    <article class="post preview">
+      <header>
+        <h1><a class="permalink title" href="#" rel="bookmark">Title</a></h1>
+        <p class="date">Date</p>
+      </header>
+      <section class="body"></section>
+      <p class="more"><a class="permalink" href="#">{{ __('Read more') }}</a>
+    </article>
+    <article class="post full">
+      <header>
+        <p class="date">Date</p>
+        <h1 class="title">Title</h1>
+      </header>
+      <section class="body"></section>
+    </article>
+  </div>
+
+{% endblock %}

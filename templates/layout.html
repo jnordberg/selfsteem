@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+
+
+
+                   /
+              (   (   (
+               \   \   \
+                \   \   \
+                 )   )   )
+                    /
+
+              SelfSteem v{{ release }}
+      github.com/jnordberg/selfsteem
+
+
+-->
+<html{% if lang %} lang="{{ lang }}"{% endif %} class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{{ title }}</title>
+  <script type="text/javascript">
+    document.documentElement.classList.remove('no-js')
+    window.config = {
+      locale: '{{ locale }}',
+      username: '{{ username }}'
+    }
+  </script>
+  {{ browserifyLibs }}{{ livereloadScript -}}
+  <link rel="stylesheet" href="selfsteem.css?v={{ release }}">
+  <script src="selfsteem.js?v={{ release }}"></script>
+</head>
+<body>
+  {%- block body %}{% endblock -%}
+</body>
+</html>
