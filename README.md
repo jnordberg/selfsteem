@@ -6,6 +6,8 @@ Standalone blog powered by the [Steem blockchain](https://steem.io). Built with 
 
 The output is static html, js and css that can be hosted anywhere.
 
+**[Demo here](https://jnordberg.github.io/selfsteem/)**
+
 
 Setup instructions
 ------------------
