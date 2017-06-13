@@ -18,8 +18,13 @@
 <html{% if lang %} lang="{{ lang }}"{% endif %} class="no-js">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
   <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="{{ author }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
   <script type="text/javascript">
     document.documentElement.classList.remove('no-js')
     window.config = {

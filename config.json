@@ -1,6 +1,7 @@
 {
   "locals": {
     "title": "My SelfSteem Blog",
+    "description": "A shiny blog powered by the steem blockchain",
     "author": "Santa Claus",
     "username": "donkeypong",
     "copyright": "© 2017",
