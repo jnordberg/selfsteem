@@ -12,11 +12,11 @@
     "defaultLocale": "en",
     "locales": ["en", "ja"]
   },
-  "static": [
-    "styles/loading.styl",
+  "ignore": [
+    ".DS_Store",
+    "styles/**/*",
     "scripts/**/*"
   ],
-  "ignore": [".DS_Store"],
   "browserify": {
     "debug": true,
     "watchify": false,
@@ -33,7 +33,6 @@
     "wintersmith-i18n",
     "wintersmith-livereload",
     "wintersmith-nunjucks",
-    "wintersmith-stylus",
-    "wintersmith-static"
+    "wintersmith-stylus"
   ]
 }
