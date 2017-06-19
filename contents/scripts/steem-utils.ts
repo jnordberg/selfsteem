@@ -68,7 +68,10 @@ export interface IDiscussion extends ICommentApiObj {
     first_reblogged_on?: any // time_point_sec
 }
 
-export async function fetchPosts(author: string, limit: number = 10, from?: string): Promise<IDiscussion[]> {
+export type FilterFn = (IDiscussion) => boolean
+const allowAll = (post: IDiscussion) => true
+
+export async function fetchPosts(author: string, limit: number = 10, filter: FilterFn = allowAll, from?: string): Promise<IDiscussion[]> {
     let results: IDiscussion[] = []
     let seen: {[id: number]: boolean} = {}
     let query: IDisqussionQuery = {tag: author, limit: limit+1}
@@ -78,16 +81,18 @@ export async function fetchPosts(author: string, limit: number = 10, from?: stri
     }
     do {
         const posts: IDiscussion[] = await steem.api.getDiscussionsByBlog(query)
+        let valid: IDiscussion[] = []
         for (const post of posts) {
             // filter out resteemed posts
             if (post.author === author && !seen[post.id]) {
                 seen[post.id] = true // .. why can you resteem your own posts?
-                results.push(post)
+                valid.push(post)
                 if (results.length === limit) {
                     break
                 }
             }
         }
+        results.concat(valid.filter(filter))
         if (posts.length !== query.limit) {
             break
         }

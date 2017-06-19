@@ -1,6 +1,7 @@
 
 import {fetchPosts, fetchPost, IDiscussion} from './steem-utils'
 import {init as initRender, renderPost} from './render'
+import isBlogPost from './filter'
 
 import * as marked from 'marked'
 import * as moment from 'moment'
@@ -46,7 +47,7 @@ export default async function main(config: AppConfig) {
         if (args.from) {
             document.documentElement.classList.add('in-history')
         }
-        let posts = await fetchPosts(config.username, perPage+1, args.from)
+        let posts = await fetchPosts(config.username, perPage+1, isBlogPost, args.from)
         let next: IDiscussion
         if (posts.length === perPage+1) {
             next = posts.pop()
