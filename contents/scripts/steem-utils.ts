@@ -92,7 +92,7 @@ export async function fetchPosts(author: string, limit: number = 10, filter: Fil
                 }
             }
         }
-        results.concat(valid.filter(filter))
+        results = results.concat(valid.filter(filter))
         if (posts.length !== query.limit) {
             break
         }
