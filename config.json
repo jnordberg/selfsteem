@@ -10,7 +10,7 @@
   },
   "i18n": {
     "defaultLocale": "en",
-    "locales": ["en", "ja"]
+    "locales": ["en", "ja", "fr"]
   },
   "ignore": [
     ".DS_Store",
