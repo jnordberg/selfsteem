@@ -3,6 +3,9 @@ import * as moment from 'moment'
 import * as marked from 'marked'
 import {Discussion} from 'dsteem'
 
+// // from condenser
+const youTubeId = /(?:(?:youtube.com\/watch\?v=)|(?:youtu.be\/)|(?:youtube.com\/embed\/))([A-Za-z0-9\_\-]+)/i
+
 let postFullTemplate: HTMLElement
 let postPreviewTemplate: HTMLElement
 let postDateFormat: string
@@ -22,6 +25,14 @@ function renderBody(post: Discussion): HTMLElement {
         a.target = '_blank'
         if (isImage(a.href)) {
             a.innerHTML = `<img src="${ a.href }" />`
+        }
+        const matches = a.href.match(youTubeId)
+        if (matches) {
+            const iframe = document.createElement('iframe')
+            iframe.id = 'ytplayer'
+            iframe.frameBorder = '0'
+            iframe.src = `https://www.youtube.com/embed/${ matches[1] }`
+            a.parentNode.replaceChild(iframe, a)
         }
     }
     return element
@@ -47,9 +58,17 @@ export function renderPost(post: Discussion, preview: boolean = false): HTMLElem
 
     const body = renderBody(post)
     const postBody = element.querySelector('.body')
+    const metadata = JSON.parse(post.json_metadata)
 
     if (preview) {
-        const firstImage = body.querySelector('img')
+        let firstImage: HTMLImageElement
+        if (metadata.image && metadata.image.length > 0) {
+            const image = document.createElement('img')
+            image.src = metadata.image[0]
+            firstImage = image
+        } else {
+            firstImage = body.querySelector('img')
+        }
         if (firstImage) {
             const imageP = document.createElement('p')
             const imageLink = document.createElement('a')
@@ -58,9 +77,16 @@ export function renderPost(post: Discussion, preview: boolean = false): HTMLElem
             imageP.appendChild(imageLink)
             postBody.appendChild(imageP)
         }
-        const firstParagraphs = Array.from(body.querySelectorAll('p:nth-child(-n+2)'))
+        let numAppended = 0
+        const firstParagraphs = Array.from(body.querySelectorAll('p'))
         for (const p of firstParagraphs) {
+            if (p.querySelectorAll('img,a').length > 0 && p.textContent.length < 60) {
+                continue
+            }
             postBody.appendChild(p)
+            if (++numAppended > 2) {
+                break
+            }
         }
     } else {
         postBody.appendChild(body)

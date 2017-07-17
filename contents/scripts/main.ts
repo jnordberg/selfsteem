@@ -53,7 +53,7 @@ export default async function main(config: AppConfig) {
         }
         let posts = await fetchPosts(client, config.username, perPage+1, isBlogPost, args.from)
         let next: Discussion
-        if (posts.length === perPage+1) {
+        if (posts.length >= perPage+1) {
             next = posts.pop()
             document.documentElement.classList.add('has-older')
             olderLink.href = `?from=${ next.permlink }`
