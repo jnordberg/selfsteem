@@ -1,14 +1,13 @@
 
 import * as moment from 'moment'
 import * as marked from 'marked'
-
-import {IDiscussion} from './steem-utils'
+import {Discussion} from 'dsteem'
 
 let postFullTemplate: HTMLElement
 let postPreviewTemplate: HTMLElement
 let postDateFormat: string
 
-function postPermalink(post: IDiscussion): string {
+function postPermalink(post: Discussion): string {
     return `?post=${ post.permlink }`
 }
 
@@ -16,7 +15,7 @@ function isImage(url: string): boolean {
     return /\.(png|jpg|jpeg|gif)(\?.*)*$/i.test(url)
 }
 
-function renderBody(post: IDiscussion): HTMLElement {
+function renderBody(post: Discussion): HTMLElement {
     let element = document.createElement('div')
     element.innerHTML = marked(post.body)
     for (const a of Array.from(element.querySelectorAll('a'))) {
@@ -28,7 +27,7 @@ function renderBody(post: IDiscussion): HTMLElement {
     return element
 }
 
-export function renderPost(post: IDiscussion, preview: boolean = false): HTMLElement {
+export function renderPost(post: Discussion, preview: boolean = false): HTMLElement {
     const template = preview ? postPreviewTemplate : postFullTemplate
     let element = template.cloneNode(true) as HTMLElement
 

@@ -2,7 +2,8 @@
   "compilerOptions": {
     "lib": [
       "dom",
-      "es2015"
+      "es2015",
+      "esnext.asynciterable"
     ],
     "module": "commonjs",
     "moduleResolution": "node",

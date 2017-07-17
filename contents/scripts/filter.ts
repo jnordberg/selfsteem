@@ -1,5 +1,5 @@
 
-import {IDiscussion} from './steem-utils'
+import {Discussion} from 'dsteem'
 
 interface ISteemitMetadata {
     tags: string[]
@@ -10,12 +10,12 @@ interface ISteemitMetadata {
 
 // edit this function to determine which posts to include
 // in your blog, by default all posts are shown
-export default function filter(post: IDiscussion): boolean {
+export default function filter(post: Discussion): boolean {
     return true
 }
 
 // for example, this only includes posts that has the steemit tag 'blog'
-function example(post: IDiscussion): boolean {
+function example(post: Discussion): boolean {
     let metadata: ISteemitMetadata
     try {
         metadata = JSON.parse(post.json_metadata)
@@ -23,7 +23,7 @@ function example(post: IDiscussion): boolean {
         console.warn('Unable to parse metadata for', post.url)
         return false
     }
-    if (metadata.tags.indexOf('blog') !== -1) {
+    if (metadata.tags && metadata.tags.indexOf('blog') !== -1) {
         return true
     }
     return false

@@ -5,8 +5,9 @@
     "author": "Santa Claus",
     "username": "donkeypong",
     "copyright": "© 2017",
+    "server": "wss://steemd.steemit.com",
     "locale": "en",
-    "release": "1"
+    "release": "2"
   },
   "i18n": {
     "defaultLocale": "en",
@@ -22,7 +23,7 @@
     "watchify": false,
     "extensions": [".ts"],
     "plugins": ["tsify"],
-    "staticLibs": ["steem", "moment"],
+    "staticLibs": ["dsteem", "moment"],
     "staticLibsBundle": true
   },
   "stylus": {

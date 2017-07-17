@@ -1,11 +1,12 @@
 
-import {fetchPosts, fetchPost, IDiscussion} from './steem-utils'
-import {init as initRender, renderPost} from './render'
-import isBlogPost from './filter'
-
+import {Client, Discussion} from 'dsteem'
 import * as marked from 'marked'
 import * as moment from 'moment'
 import * as querystring from 'querystring'
+
+import {fetchPosts, fetchPost} from './steem-utils'
+import {init as initRender, renderPost} from './render'
+import isBlogPost from './filter'
 
 // this loads all moment locales, to save a few bytes from the bundle
 // require just the locales needed instead, e.g. require('moment/locale/ja')
@@ -16,6 +17,7 @@ marked.setOptions({smartypants: true})
 interface AppConfig {
     locale: string
     username: string
+    server: string
     perPage?: number
     dateFormat?: string
 }
@@ -29,6 +31,8 @@ export default async function main(config: AppConfig) {
     moment.locale(config.locale)
     initRender(document.getElementById('templates'), config.dateFormat || configDefaults.dateFormat)
 
+    const client = new Client(config.server)
+
     const args = querystring.parse((window.location.search || '').substr(1))
     const perPage = config.perPage || configDefaults.perPage
 
@@ -40,15 +44,15 @@ export default async function main(config: AppConfig) {
     homeLink.href = window.location.pathname
 
     if (args.post) {
-        let post = await fetchPost(config.username, args.post)
+        let post = await fetchPost(client, config.username, args.post)
         postsContainer.appendChild(renderPost(post))
         document.documentElement.classList.add('on-post')
     } else {
         if (args.from) {
             document.documentElement.classList.add('in-history')
         }
-        let posts = await fetchPosts(config.username, perPage+1, isBlogPost, args.from)
-        let next: IDiscussion
+        let posts = await fetchPosts(client, config.username, perPage+1, isBlogPost, args.from)
+        let next: Discussion
         if (posts.length === perPage+1) {
             next = posts.pop()
             document.documentElement.classList.add('has-older')

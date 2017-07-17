@@ -29,7 +29,8 @@
     document.documentElement.classList.remove('no-js')
     window.config = {
       locale: '{{ locale }}',
-      username: '{{ username }}'
+      username: '{{ username }}',
+      server: '{{ server }}'
     }
   </script>
   {{ browserifyLibs }}{{ livereloadScript -}}
