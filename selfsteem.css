@@ -214,6 +214,10 @@ body > header h1 {
 .post img {
   max-width: 100%;
 }
+.post iframe {
+  width: 100%;
+  min-height: 30em;
+}
 .post.full header h1 {
   margin-bottom: 1em;
 }
