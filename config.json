@@ -5,7 +5,7 @@
     "author": "Santa Claus",
     "username": "donkeypong",
     "copyright": "© 2017",
-    "server": "wss://steemd.steemit.com",
+    "server": "https://api.steemit.com",
     "locale": "en",
     "release": "2"
   },
