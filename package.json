@@ -12,7 +12,7 @@
     "@types/marked": "0.0.28",
     "@types/node": "^7.0.22",
     "@types/shelljs": "^0.7.2",
-    "dsteem": "^0.4.1",
+    "dsteem": "^0.8.6",
     "es6-promise": "^4.1.0",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
