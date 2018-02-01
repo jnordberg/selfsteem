@@ -11,7 +11,7 @@
   },
   "i18n": {
     "defaultLocale": "en",
-    "locales": ["en", "ja", "fr"]
+    "locales": ["en", "ja", "fr", "zh"]
   },
   "ignore": [
     ".DS_Store",
