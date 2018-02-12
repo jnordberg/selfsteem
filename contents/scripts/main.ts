@@ -33,7 +33,7 @@ export default async function main(config: AppConfig) {
 
     const client = new Client(config.server)
 
-    const args = querystring.parse((window.location.search || '').substr(1))
+    const args = querystring.parse((window.location.search || '').substr(1)) as any
     const perPage = config.perPage || configDefaults.perPage
 
     let postsContainer = document.querySelector('#posts')
